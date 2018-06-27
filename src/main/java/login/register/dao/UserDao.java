@@ -30,7 +30,7 @@ public class UserDao {
 				
 				// get db connection
 				myConn = dataSource.getConnection();
-				
+								
 				// create sql for insert
 				String sql = "INSERT INTO user "
 						   + "(user_name, name, password) "
@@ -56,41 +56,54 @@ public class UserDao {
 	 }
 			
 
-	
-	 public UserBean getUser(String userid, String pass) throws Exception {
-		 			
-		 	UserBean user = new UserBean();
-		 
+	 public UserBean getUser(String theUsername, String thePassword) throws Exception {
+			
+			UserBean theUser = null;
+			
 			Connection myConn = null;
 			PreparedStatement myStmt = null;
-			ResultSet myRs = null; 
-			
-			String query = "SELECT * FROM user WHERE username = ? AND password = ?";
+			ResultSet myRs = null;
 					 
-			try {			
+			try {	
 				
+				System.out.println("Asta se afisaza 1");
+				
+				// get connection to database
 				myConn = dataSource.getConnection();
-		
-				myStmt = myConn.prepareStatement(query); 
-				myStmt.setString(1, userid);
-				myStmt.setString(2, pass);
 				
-				myRs = myStmt.executeQuery(query); 
+				System.out.println("Asta se afisaza 2");
+				
+				// create sql to get selected student
+				String sql = "SELECT * FROM user WHERE user_name = ? AND password = ?";
+				
+				// create prepared statement
+				myStmt = myConn.prepareStatement(sql);
+				
+				// set params
+				myStmt.setString(1, theUsername);
+				myStmt.setString(2, thePassword);
+				
+				// execute statement
+				myRs = myStmt.executeQuery();
 							
-				while (myRs.next()) {
+				if (myRs.next()) {
 					
-					user.setUsername(myRs.getString(1)); 
-					user.setName(myRs.getString(2)); 
-					user.setUsername(myRs.getString(3));  
+					String username = myRs.getString("user_name");
+					String name = myRs.getString("name");
+					String pass = myRs.getString("password");
+					
+					// use the studentId during construction
+					theUser = new UserBean(username, name, pass);
 				}
 							
-				return user;
+				return theUser;
 						
 			} finally {
 					
 					close(myConn, myStmt, myRs);
 			}
 	 }
+
 	 
 		private void close(Connection myConn, Statement myStmt, ResultSet myRs) {
 

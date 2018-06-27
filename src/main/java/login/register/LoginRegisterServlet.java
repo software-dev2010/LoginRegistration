@@ -43,9 +43,44 @@ public class LoginRegisterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		String submitType = request.getParameter("submit");
+		try {
+			
+			String username = request.getParameter("username");
+			String password = request.getParameter("password1");
+			String submitType = request.getParameter("submit");
+			
+			System.out.println(submitType); 
+			
+			UserBean user = userDao.getUser(username, password);
+			
+			if (submitType.equals("login") && user != null && user.getName() != null) {
+				
+				request.setAttribute("message", user.getName());
+				request.getRequestDispatcher("welcome.jsp").forward(request, response); 
+			} else if (submitType.equals("Register")) {
+				
+				System.out.println("Asta se afisaza 3");
+				
+				user.setName(request.getParameter("name"));  
+				user.setUsername(username);  
+				user.setPassword(password); 
+				
+				userDao.insertUser(user); 
+				
+				System.out.println("Asta se afisaza 4");
+				
+				request.setAttribute("successMessage", "Registration complete, please login to your account!!!");
+				request.getRequestDispatcher("login.jsp").forward(request, response); 
+			} else {
+				
+				request.setAttribute("message", "Data Not Found, click on Register!!!");
+				request.getRequestDispatcher("login.jsp").forward(request, response); 
+
+			}
+		} catch (Exception exc) {
+			
+			throw new ServletException(exc);
+		} 
 
 	}
 
