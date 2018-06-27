@@ -28,8 +28,12 @@ public class UserDao {
 			
 			try {
 				
+				System.out.println("Asta se afisaza 3");
+				
 				// get db connection
 				myConn = dataSource.getConnection();
+				
+				System.out.println("Asta se afisaza 4");
 								
 				// create sql for insert
 				String sql = "INSERT INTO user "

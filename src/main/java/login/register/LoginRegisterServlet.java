@@ -45,42 +45,77 @@ public class LoginRegisterServlet extends HttpServlet {
 
 		try {
 			
-			String username = request.getParameter("username");
-			String password = request.getParameter("password1");
-			String submitType = request.getParameter("submit");
+			String submitType = request.getParameter("submit"); 
 			
-			System.out.println(submitType); 
+			switch (submitType) {
 			
-			UserBean user = userDao.getUser(username, password);
-			
-			if (submitType.equals("login") && user != null && user.getName() != null) {
+			case "login":
+				loginUser(request, response);
+				break;
 				
-				request.setAttribute("message", user.getName());
-				request.getRequestDispatcher("welcome.jsp").forward(request, response); 
-			} else if (submitType.equals("Register")) {
+			case "Register":
+				registerUser(request, response); 
+				break;
 				
-				System.out.println("Asta se afisaza 3");
-				
-				user.setName(request.getParameter("name"));  
-				user.setUsername(username);  
-				user.setPassword(password); 
-				
-				userDao.insertUser(user); 
-				
-				System.out.println("Asta se afisaza 4");
-				
-				request.setAttribute("successMessage", "Registration complete, please login to your account!!!");
-				request.getRequestDispatcher("login.jsp").forward(request, response); 
-			} else {
-				
-				request.setAttribute("message", "Data Not Found, click on Register!!!");
-				request.getRequestDispatcher("login.jsp").forward(request, response); 
-
+			default:
+				loginUser(request, response);
 			}
+						
 		} catch (Exception exc) {
 			
 			throw new ServletException(exc);
 		} 
+
+	}
+
+	private void loginUser(HttpServletRequest request, HttpServletResponse response) 
+			throws Exception {
+
+		String username = request.getParameter("username");
+		String password = request.getParameter("password1");
+		
+		UserBean user = userDao.getUser(username, password);
+		
+		if (user != null && user.getName() != null) {
+			
+			request.setAttribute("message", user.getName());
+			request.getRequestDispatcher("welcome.jsp").forward(request, response); 
+		} else {
+			
+			request.setAttribute("message", "Incorrect username or password. <br/>Please try again!");
+			request.getRequestDispatcher("login.jsp").forward(request, response); 
+		}
+
+	}
+
+	private void registerUser(HttpServletRequest request, HttpServletResponse response) 
+			throws Exception {
+
+		String username = request.getParameter("username");
+		String password = request.getParameter("password1");
+		String confirmPassword = request.getParameter("password2");
+		String name = request.getParameter("name");  
+
+		UserBean user = new UserBean(); 
+		
+		user.setUsername(username);  
+		user.setPassword(password); 
+		user.setName(name);
+		
+		if (password.equals(confirmPassword)) {
+			
+			userDao.insertUser(user); 
+
+			request.setAttribute("successMessage", "Registration complete!");
+			request.getRequestDispatcher("login.jsp").forward(request, response); 
+		} else {
+			
+			request.setAttribute("errorMessage", "Passwords did not match. <br/> Please enter the same password in both fields.");
+			request.setAttribute("userName", username);
+			request.setAttribute("Name", name);
+			
+			request.getRequestDispatcher("register.jsp").forward(request, response); 
+		}
 
 	}
 
