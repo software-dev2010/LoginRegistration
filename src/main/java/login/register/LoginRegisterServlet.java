@@ -47,17 +47,11 @@ public class LoginRegisterServlet extends HttpServlet {
 			
 			String submitType = request.getParameter("submit"); 
 			
-			switch (submitType) {
-			
-			case "login":
-				loginUser(request, response);
-				break;
+			if (submitType.equals("Register")) {
 				
-			case "Register":
-				registerUser(request, response); 
-				break;
+				registerUser(request, response);
+			} else {
 				
-			default:
 				loginUser(request, response);
 			}
 						
@@ -76,9 +70,20 @@ public class LoginRegisterServlet extends HttpServlet {
 		
 		UserBean user = userDao.getUser(username, password);
 		
-		if (user != null && user.getName() != null) {
+		if (user != null) {
 			
-			request.setAttribute("message", user.getName());
+			// request.setAttribute("message", user.getName());
+			
+            HttpSession session = request.getSession();  
+            session.setAttribute("nameAtr", user.getName());  
+            
+    	    // Encodes the specified URL by including the session ID in it,
+    	    // or, if encoding is not needed, returns the URL unchanged
+    	    String profileURL = response.encodeURL("ProfileServlet");
+    	    String friendsURL = response.encodeURL("FriendsServlet");
+    	    session.setAttribute("profileAtr", profileURL);
+    	    session.setAttribute("friendsAtr", friendsURL);
+			
 			request.getRequestDispatcher("welcome.jsp").forward(request, response); 
 		} else {
 			

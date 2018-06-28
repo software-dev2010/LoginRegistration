@@ -10,8 +10,38 @@
   	<description></description>
   	<servlet-class>login.register.LoginRegisterServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>ProfileServlet</servlet-name>
+  	<display-name>ProfileServlet</display-name>
+  	<description></description>
+  	<servlet-class>login.register.ProfileServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>FriendsServlet</servlet-name>
+  	<display-name>FriendsServlet</display-name>
+  	<description></description>
+  	<servlet-class>login.register.FriendsServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>LogoutServlet</servlet-name>
+  	<display-name>LogoutServlet</display-name>
+  	<description></description>
+  	<servlet-class>login.register.LogoutServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>LoginRegisterServlet</servlet-name>
   	<url-pattern>/LoginRegisterServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ProfileServlet</servlet-name>
+  	<url-pattern>/ProfileServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>FriendsServlet</servlet-name>
+  	<url-pattern>/FriendsServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LogoutServlet</servlet-name>
+  	<url-pattern>/LogoutServlet</url-pattern>
   </servlet-mapping>
 </web-app>

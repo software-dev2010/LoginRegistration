@@ -10,10 +10,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="${profileAtr}">Profile</a> |
 	<a href="${friendsAtr}">Friends</a> |  
 	<a href="LogoutServlet">Logout</a> 
 	<hr>   
-	<h1 style="color: blue">Hi ${nameAtr}!!! This is welcome page!!!</h1>
+	<h1 style="color: blue">Hi ${nameAtr}!!! This is your profile page!!!</h1>
 </body>
 </html>

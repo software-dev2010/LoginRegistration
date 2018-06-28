@@ -27,14 +27,10 @@ public class UserDao {
 			PreparedStatement myStmt = null;
 			
 			try {
-				
-				System.out.println("Asta se afisaza 3");
-				
+								
 				// get db connection
 				myConn = dataSource.getConnection();
-				
-				System.out.println("Asta se afisaza 4");
-								
+												
 				// create sql for insert
 				String sql = "INSERT INTO user "
 						   + "(user_name, name, password) "
@@ -69,14 +65,10 @@ public class UserDao {
 			ResultSet myRs = null;
 					 
 			try {	
-				
-				System.out.println("Asta se afisaza 1");
-				
+								
 				// get connection to database
 				myConn = dataSource.getConnection();
-				
-				System.out.println("Asta se afisaza 2");
-				
+								
 				// create sql to get selected student
 				String sql = "SELECT * FROM user WHERE user_name = ? AND password = ?";
 				
@@ -85,7 +77,7 @@ public class UserDao {
 				
 				// set params
 				myStmt.setString(1, theUsername);
-				myStmt.setString(2, thePassword);
+				myStmt.setString(2, thePassword); 
 				
 				// execute statement
 				myRs = myStmt.executeQuery();
@@ -129,6 +121,7 @@ public class UserDao {
 				}                     // and makes it available for someone else to use
 			} catch (Exception exc) {
 				
+				System.out.println("A intervenit aceasta exceptie"); 
 				System.out.println(exc);
 			}
 		}
