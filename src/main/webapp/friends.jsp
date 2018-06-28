@@ -13,6 +13,6 @@
 	<a href="${profileAtr}">Profile</a> |  
 	<a href="LogoutServlet">Logout</a> 
 	<hr>   
-	<h1 style="color: blue">Hi ${nameAtr}!!! You have 150 friends!!!</h1>
+	<h1 style="color: blue">Hi ${userAtr.name}!!! You have 150 friends!!!</h1>
 </body>
 </html>

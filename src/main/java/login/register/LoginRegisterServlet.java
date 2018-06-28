@@ -39,6 +39,67 @@ public class LoginRegisterServlet extends HttpServlet {
 			throw new ServletException(exc);
 		}
 	}
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		
+		try {
+			
+			// read the "command" parameter
+			String theCommand = request.getParameter("command");
+			
+			// if the command is missing, then default to listing students
+			if (theCommand == null) {
+				
+				theCommand = "LOGIN";
+			}
+			
+			if (theCommand.equals("UPDATE")) {
+				
+				updateUser(request, response);
+			} else if (theCommand.equals("DELETE")) {
+				
+				deleteUser(request, response);
+			} 
+		} catch (Exception exc) {
+			
+			throw new ServletException(exc);
+		}
+	}
+
+	private void deleteUser(HttpServletRequest request, HttpServletResponse response) { 
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void updateUser(HttpServletRequest request, HttpServletResponse response) 
+			throws Exception {
+		
+		// read student info from form data
+		int id = Integer.parseInt(request.getParameter("userId"));
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String country = request.getParameter("country");
+		String town = request.getParameter("town");
+		int age = Integer.parseInt(request.getParameter("age")); 
+		
+		System.out.println(id);
+		
+		// create a new student object
+		UserBean theUser = new UserBean(id, username, password, name, email, country, town, age);
+		
+		// perform update on database
+		userDao.updateUser(theUser);
+		
+		HttpSession session = request.getSession();
+		
+        session.setAttribute("userAtr", theUser); 
+                		
+		// send them back to the profile page
+		request.getRequestDispatcher("ProfileServlet").forward(request, response);	
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
@@ -68,14 +129,14 @@ public class LoginRegisterServlet extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password1");
 		
-		UserBean user = userDao.getUser(username, password);
-		
+		UserBean user = userDao.getUser(username, password); 
+				
 		if (user != null) {
 			
 			// request.setAttribute("message", user.getName());
 			
             HttpSession session = request.getSession();  
-            session.setAttribute("nameAtr", user.getName());  
+            session.setAttribute("userAtr", user);   
             
     	    // Encodes the specified URL by including the session ID in it,
     	    // or, if encoding is not needed, returns the URL unchanged

@@ -14,6 +14,6 @@
 	<a href="${friendsAtr}">Friends</a> |  
 	<a href="LogoutServlet">Logout</a> 
 	<hr>   
-	<h1 style="color: blue">Hi ${nameAtr}!!! This is welcome page!!!</h1>
+	<h1 style="color: blue">Hi ${userAtr.name}!!! This is welcome page!!!</h1>
 </body>
 </html>

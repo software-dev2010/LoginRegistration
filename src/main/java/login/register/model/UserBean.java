@@ -6,22 +6,38 @@ public class UserBean {
 	 private String username; 
 	 private String password; 
 	 private String name;
+	 private String email;
+	 private String country;
+	 private String town;
+	 private int age;
 	 
-	public UserBean(int id, String username, String password, String name) {
-		super();
+	 
+	 
+	public UserBean(int id, String username, String password, String name, String email, 
+			String country, String town, int age) {
+		
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.name = name;
+		this.email = email;
+		this.country = country;
+		this.town = town;
+		this.age = age;
 	}
 	
-	public UserBean(String username, String name, String password) {
-		super();
+	public UserBean(String username, String password, String name, String email, 
+			String country, String town, int age) {
+		
 		this.username = username;
-		this.name = name;
 		this.password = password;
+		this.name = name;
+		this.email = email;
+		this.country = country;
+		this.town = town;
+		this.age = age;
 	}
-	
+
 	public UserBean() {
 		
 		
@@ -66,6 +82,37 @@ public class UserBean {
 		
 		this.name = name;
 	}
-	 
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getTown() {
+		return town;
+	}
+
+	public void setTown(String town) {
+		this.town = town;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
 }
 

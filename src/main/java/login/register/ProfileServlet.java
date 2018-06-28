@@ -17,6 +17,8 @@ public class ProfileServlet extends HttpServlet {
         
         if (session != null) { 
         	
+        	// UserBean user = userDao.getUser();
+        	
     	    String friendsURL = response.encodeURL("FriendsServlet");
     	    session.setAttribute("friendsAtr", friendsURL);
         	
