@@ -67,8 +67,23 @@ public class LoginRegisterServlet extends HttpServlet {
 		}
 	}
 
-	private void deleteUser(HttpServletRequest request, HttpServletResponse response) { 
-		// TODO Auto-generated method stub
+	private void deleteUser(HttpServletRequest request, HttpServletResponse response)
+				throws Exception { 
+				
+		// read student id from form data
+		String theUserId = request.getParameter("userId");
+		
+		System.out.println(theUserId); 
+		
+		// delete student from database
+		userDao.deleteUser(theUserId);
+		
+        HttpSession session = request.getSession();  
+        session.removeAttribute("userAtr"); 
+        session.invalidate();  
+        
+        request.setAttribute("message", "Your account was permanently deleted!");
+        request.getRequestDispatcher("login.jsp").forward(request, response);
 		
 	}
 

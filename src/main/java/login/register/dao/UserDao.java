@@ -170,4 +170,35 @@ public class UserDao {
 			
 		}
 
+		public void deleteUser(String theUserId) throws Exception {
+			
+			Connection myConn = null;
+			PreparedStatement myStmt = null;
+			
+			try {
+				
+				// convert student id to int
+				int userId = Integer.parseInt(theUserId);
+				
+				// get connection to database
+				myConn = dataSource.getConnection();
+				
+				// create sql to delete user
+				String sql = "DELETE FROM user WHERE id = ?";
+				
+				// prepare statement
+				myStmt = myConn.prepareStatement(sql);
+				
+				// set params
+				myStmt.setInt(1, userId);
+				
+				// execute sql statement
+				myStmt.execute();
+			}
+			finally {
+				
+				// clean up JDBC code
+				close(myConn, myStmt, null);
+			}	
+		}
 }

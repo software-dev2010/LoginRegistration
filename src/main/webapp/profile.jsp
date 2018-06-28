@@ -84,9 +84,9 @@
 		<div style="clear: both;"></div>
 		
 		<p>
-			<c:url var="deleteLink" value="StudentControllerServlet">
+			<c:url var="deleteLink" value="LoginRegisterServlet">
 				<c:param name="command" value="DELETE" /> 
-				<c:param name="studentId" value="${userAtr.id}" />		
+				<c:param name="userId" value="${userAtr.id}" />		
 			</c:url>
 			
 			<a href="${deleteLink}"
