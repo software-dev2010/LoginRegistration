@@ -33,7 +33,7 @@
 			</tr>
 			<tr>
 				<td><input type="submit" name="submit" value="login"></td>
-				<td><a href="register.jsp">Register</a></td>
+				<td><a href="${pageContext.request.contextPath}/register.jsp">Register</a></td>
 			</tr>
 		</table>
 	</form>

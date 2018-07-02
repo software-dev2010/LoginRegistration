@@ -159,7 +159,7 @@ public class LoginRegisterServlet extends HttpServlet {
     	    String friendsURL = response.encodeURL("FriendsServlet");
     	    session.setAttribute("profileAtr", profileURL);
     	    session.setAttribute("friendsAtr", friendsURL);
-			
+    	    			
 			request.getRequestDispatcher("welcome.jsp").forward(request, response); 
 		} else {
 			

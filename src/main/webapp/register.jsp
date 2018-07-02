@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="loginRegister" method="post">
+	<form action="private/loginRegister" method="post">
 		<table style="background-color: skyblue; margin-left: 20px; margin-top: 20px">
 		
 			<tr>

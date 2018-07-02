@@ -10,6 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<a href="${profileAtr}">Profile</a> |
 	<a href="${friendsAtr}">Friends</a> |  
 	<a href="LogoutServlet">Logout</a> 
