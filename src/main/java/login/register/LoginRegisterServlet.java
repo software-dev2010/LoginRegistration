@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 import login.register.dao.UserDao;
 import login.register.model.UserBean;
 
-@WebServlet("/loginRegister")
+@WebServlet("/private/loginRegister")
 public class LoginRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -51,7 +51,7 @@ public class LoginRegisterServlet extends HttpServlet {
 			// if the command is missing, then default to listing students
 			if (theCommand == null) {
 				
-				theCommand = "LOGIN";
+				request.getRequestDispatcher("login.jsp").forward(request, response); 
 			}
 			
 			if (theCommand.equals("UPDATE")) {
